@@ -1,0 +1,229 @@
+#include<iostream>
+#include<string>
+#include<fstream>
+using namespace std;
+class PakMobile
+{
+	//write program to stored information from mobile company,and claculate its tax,take servey for admin who want to start business
+public:
+	int permission;
+	void set_permisson()
+	{
+		cout << "Enter Permission : " << endl;
+		cin >> permission;
+	}
+	int get_permission()
+	{
+		return permission;
+	}
+	PakMobile()
+	{
+		cout << "Welcome!Manager of All Pakistan Mobile:" << endl;
+	}
+	virtual void display()
+	{
+		cout << "We want permission from you,to Starting My Business in Pakistan:" << endl;
+		cout << "Enter 1 for allow us:" << endl;
+		cout << "Enter 2 for deny us:" << endl;
+		cin >> permission;
+
+	}
+
+};
+class nokia :public PakMobile
+{
+public:
+	int NokMobQunt;
+	int NokMobSel;
+	int NokEmp;
+	nokia()
+	{
+		cout << "Welcome!Manager of Nokia mobile company:" << endl;
+		cout << "Please answer us the Question ask:" << endl;
+	}
+	void SetInfoNok()
+	{
+		cout << "Enter Mobile quantity that you sell in Pakistan in one year:" << endl;
+		cin >> NokMobQunt;
+		cout << "Enter your Total sell in one year:" << endl;
+		cin >> NokMobSel;
+		cout << "Enter the total number of employ work in your company:" << endl;
+		cin >> NokEmp;
+	}
+};
+class Qmobile :public PakMobile
+{
+public:
+	int QMobQunt;
+	int QMobSel;
+	int QEmp;
+	Qmobile()
+	{
+	}
+	Qmobile(string q)
+	{
+		cout << "Welcome!Manager of Qmobile mobile company:" << endl;
+		cout << "Please answer us the Question ask:" << endl;
+
+	}
+	void SetInfoQ()
+	{
+		cout << "Enter Mobile quantity that you sell in Pakistan in one year:" << endl;
+		cin >> QMobQunt;
+		cout << "Enter your Total sell in one year:" << endl;
+		cin >> QMobSel;
+		cout << "Enter the total number of employ work in your company:" << endl;
+		cin >> QEmp;
+	}
+	void file_handle_qmobile()
+	{
+		fstream data_file;
+		data_file.open("file.txt", ios::app);
+		{
+			data_file << "Qmobile Sales Count is : " << QMobQunt << endl;
+			data_file << "Total Sell in 1 year is : " << QMobSel << endl;
+			data_file << "total number of employ work in the company : " << QEmp << endl;
+		}
+		data_file.close();
+		string s;
+		data_file.open("data_file.txt", ios::in);
+		while (getline(data_file, s))
+		{
+			cout << s << endl;
+		}
+	}
+	// Copy Constructor
+	Qmobile(Qmobile &obj)
+	{
+		QMobQunt = obj.QMobQunt;
+		QMobSel = obj.QMobSel;
+		QEmp = obj.QEmp;
+	}
+	// File Handeling Qmobile Data
+
+};
+class Sony :public PakMobile
+{
+public:
+	int SonMobQuant;
+	int SonMobSel;
+	int SonEmp;
+public:
+	Sony()
+	{
+		cout << "Welcome!Manager of Sony mobile company:" << endl;
+		cout << "Please answer us the Question ask:" << endl;
+
+	}
+	void SetInfoSony()
+	{
+		cout << "Enter Mobile quantity that you sell in Pakistan in one year:" << endl;
+		cin >> SonMobQuant;
+		cout << "Enter your Total sell in one year:" << endl;
+		cin >> SonMobSel;
+		cout << "Enter the total number of employ work in your company:" << endl;
+		cin >> SonEmp;
+	}
+};
+	class CalExpen
+	{
+	public:
+		int MobilePrice;
+		string ComName;
+		int tax;
+		string msg;
+		int Trans;
+		int Labou;
+		int expens;
+	public:
+		CalExpen()
+		{
+
+		}
+		void setMobileName()
+		{
+			cout << "Enter Company Name:" << endl;
+			cin >> ComName;
+		}
+		void setMobilePri()
+		{
+			cout << "Enter Your total sell mobile in one year:" << endl;
+			cin >> MobilePrice;
+		}
+		void calculateTax()
+		{
+			//Exception Handling
+			try
+			{
+				if (MobilePrice < 1)
+					throw MobilePrice;
+				tax = MobilePrice * 0.20;
+				cout << "Tax of " << ComName << "is:" << tax;
+			}
+			catch (int m)
+			{
+				cout << "Mobile price is incorrect:" << m << endl;
+			}
+		}
+		void setOtherExpen()
+		{
+			cout << "Enter Transport Expensive:" << endl;
+			cin >> Trans;
+			cout << "Enter Labour Expensive:" << endl;
+			cin >> Labou;
+		}
+		void calcTotalExpen()
+		{
+			expens = Trans + Labou + tax;
+		}
+		void show()
+		{
+		}
+	};
+	//Take Survey for realise that how much amount of people uses phone:
+	class survey
+	{
+	public:
+		int peop;
+		string FavComp;
+		string Gamph;
+	public:
+		void setInfo()
+		{
+			cout << "Enter How Many people are bought Phone in one year:" << endl;
+			cin >> peop;
+			cout << "Which company Mobile like the most:" << endl;
+			cin >> FavComp;
+			cout << "Is people are Intersted in Gaming phone:" << endl;
+			cin >> Gamph;
+		}
+	};
+	class admin
+	{
+	public:
+		admin()
+		{
+			cout << "Helo Sir! " << endl;
+			cout << "We are very  happy for you,And hope you will be successful in your Business:" << endl;
+			cout << "The program is designed according to your instruction:" << endl;
+		}
+	};
+	int main()
+	{
+		int per;
+		PakMobile s1;
+		Qmobile q1;
+		cout << "Enter 1 if you are Officer of Pak Mobile company " << endl;
+		cin >> per;
+		if (per == 1)
+		{
+			s1.set_permisson();
+			s1.get_permission();
+			s1.display();
+			q1.file_handle_qmobile();
+			q1.display();
+			q1.SetInfoQ();
+		}
+		system("pause>0");
+
+}
